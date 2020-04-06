@@ -1,0 +1,104 @@
+Color names: HTML colors
+.
+#[label](red)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Color names: HTML colors, case insensitive
+.
+#[label](Red)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Color names: X11 colors
+.
+#[label](Gold)
+.
+<p><span class="mdi-label mdi-label-text-dark" style="background-color: rgb(255, 215, 0)">label</span></p>
+.
+
+Color names: none
+.
+#[label]()
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(128, 128, 128)">label</span></p>
+.
+
+Hexadecimal notation: standard
+.
+#[label](#FF0000)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Hexadecimal notation: shorthand
+.
+#[label](#F00)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Text color: dark
+.
+#[label](white)
+.
+<p><span class="mdi-label mdi-label-text-dark" style="background-color: rgb(255, 255, 255)">label</span></p>
+.
+
+Invalid syntax: unsupported color name
+.
+#[label](rainbow)
+.
+<p>#<a href="rainbow">label</a></p>
+.
+
+Invalid syntax: transparent
+.
+#[label](transparent)
+.
+<p>#<a href="transparent">label</a></p>
+.
+
+Invalid syntax: no #
+.
+#[label](FF0000)
+.
+<p>#<a href="FF0000">label</a></p>
+.
+
+Multi-label: same color
+.
+#[label](red) #[label](red)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Multi-label: different color
+.
+#[label](red) #[label](green)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(0, 128, 0)">label</span></p>
+.
+
+Multi-label: no color shorthand
+.
+#[label](red) #[label]()
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span></p>
+.
+
+Multi-label: overwrite color
+.
+#[label](red) #[label]() #[label](green) #[label]()
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(0, 128, 0)">label</span> <span class="mdi-label mdi-label-text-light" style="background-color: rgb(0, 128, 0)">label</span></p>
+.
+
+Label text: inline formatting
+.
+#[*important*](red)
+.
+<p><span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)"><em>important</em></span></p>
+.
