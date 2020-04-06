@@ -2,26 +2,26 @@
 
 > A markdown-it plugin, which adds labels/tags
 
-### Preview
+## Preview
 
 ![preview](docs/preview.png)
 
-### Usage
+## Usage
 
-#### Install
+### Install
 
 ```bash
 npm install markdown-it-label
 ```
 
-#### Enable
+### Enable
 
 ```js
 const markdown_it = require("markdown-it");
 const markdown_it_label = require("markdown-it-label");
 const md = markdown_it().use(markdown_it_label, options);
 ```
-#### Syntax
+### Syntax
 
 ```md
 #[label_text](color)
@@ -43,7 +43,7 @@ is interpreted as
 </p>
 ```
 
-##### Colors
+#### Colors
 
 Colors can be specified in the following ways:
 
@@ -53,7 +53,7 @@ Colors can be specified in the following ways:
 
 The background color is set automatically based on the brightness of the background. Dark and light text colors can be set via options object.
 
-#### Example CSS
+### Example CSS
 
 ```css
 .mdi-label {
@@ -82,7 +82,7 @@ The background color is set automatically based on the brightness of the backgro
 
 ```json
 {
-    cssClassLabel: "mdi-label",
+	cssClassLabel: "mdi-label",
 	cssClassTextLight: "mdi-label-text-light",
 	cssClassTextDark: "mdi-label-text-dark"
 }
