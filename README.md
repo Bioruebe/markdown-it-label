@@ -1,4 +1,5 @@
 # markdown-it-label
+![npm](https://img.shields.io/npm/v/markdown-it-label) ![Tests](https://github.com/Bioruebe/markdown-it-label/workflows/Tests/badge.svg) ![markdown-it](https://img.shields.io/npm/dependency-version/markdown-it-label/peer/markdown-it)
 
 > A markdown-it plugin, which adds labels/tags
 
