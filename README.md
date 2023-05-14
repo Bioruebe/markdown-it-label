@@ -81,11 +81,11 @@ The background color is set automatically based on the brightness of the backgro
 
 ###### Default values
 
-```json
+```js
 {
-	cssClassLabel: "mdi-label",
-	cssClassTextLight: "mdi-label-text-light",
-	cssClassTextDark: "mdi-label-text-dark"
+    cssClassLabel: "mdi-label",
+    cssClassTextLight: "mdi-label-text-light",
+    cssClassTextDark: "mdi-label-text-dark"
 }
 ```
 
