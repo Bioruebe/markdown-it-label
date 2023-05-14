@@ -1,5 +1,6 @@
 # markdown-it-label
-![npm](https://img.shields.io/npm/v/markdown-it-label) ![Tests](https://github.com/Bioruebe/markdown-it-label/workflows/Tests/badge.svg) ![markdown-it](https://img.shields.io/npm/dependency-version/markdown-it-label/peer/markdown-it)
+
+![npm](https://img.shields.io/npm/v/markdown-it-label) [![Node.js CI](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml/badge.svg)](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml) ![markdown-it](https://img.shields.io/npm/dependency-version/markdown-it-label/peer/markdown-it)
 
 > A markdown-it plugin, which adds labels/tags
 
@@ -22,6 +23,7 @@ const markdown_it = require("markdown-it");
 const markdown_it_label = require("markdown-it-label");
 const md = markdown_it().use(markdown_it_label, options);
 ```
+
 ### Syntax
 
 ```md
@@ -75,8 +77,6 @@ The background color is set automatically based on the brightness of the backgro
 }
 ```
 
-
-
 ## Options
 
 ###### Default values
@@ -96,4 +96,3 @@ The class to assign to the `span` element. Useful for styling the label.
 ###### cssClassTextLight, cssClassTextDark
 
 The CSS class to be used for the label text. Which of the two is used depends on the background color and is chosen automatically to ensure proper contrast.
-
