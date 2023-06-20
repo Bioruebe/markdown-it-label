@@ -5,22 +5,37 @@ import cssColorNames from "css-color-names";
 import StateInline from "markdown-it/lib/rules_inline/state_inline";
 
 
-const defaultOptions = {
+export const defaultOptions = {
+	/** The class to assign to the span element. Useful for styling the label. */
 	cssClassLabel: "mdi-label",
+
+	/**
+	 * The CSS class to be used for light label texts.
+	 * 
+	 * Whether the light or dark class is used depends on the background color
+	 * and is chosen automatically to ensure proper contrast.
+	 */
 	cssClassTextLight: "mdi-label-text-light",
+
+	/**
+	 * The CSS class to be used for dark label texts.
+	 * 
+	 * Whether the light or dark class is used depends on the background color
+	 * and is chosen automatically to ensure proper contrast.
+	 */
 	cssClassTextDark: "mdi-label-text-dark"
 };
 
-type Options = typeof defaultOptions;
+export type MarkdownItLabelOptions = typeof defaultOptions;
 type ColorArray = [number, number, number];
 
 
-function renderLabel(options: Options) {
-	return function renderLabelToken(tokens: Token[], idx: number) {
+function renderLabel(options: MarkdownItLabelOptions) {
+	return function renderLabelToken(tokens: Token[], idx: number, _options: MarkdownIt.Options, env: any) {
 		let token = tokens[idx];
 
 		const formatColor = ([r, g, b]: ColorArray) => `rgb(${r}, ${g}, ${b})`;
-		const labelColor = getAttribute(token.attrs, "color") as unknown as ColorArray;
+		const labelColor = token.meta.color ?? parseLabelColor(env.labels[token.meta.text]) ?? [128, 128, 128];
 
 		let textColorClass = getContrastColor(labelColor, options.cssClassTextLight, options.cssClassTextDark);
 
@@ -29,18 +44,6 @@ function renderLabel(options: Options) {
 
 		return `<span class="${options.cssClassLabel}${textColorClass}" style="background-color: ${formatColor(labelColor)}">`;
 	}
-}
-
-function getAttribute(attributes: [string, string][] | null, name: string) {
-	if (!attributes || attributes.length < 1) return null;
-
-	for (let att of attributes) {
-		if (!att || att.length < 2) continue;
-
-		if (att[0] === name) return att[1];
-	}
-
-	return null;
 }
 
 // https://www.w3.org/TR/AERT#color-contrast
@@ -80,21 +83,30 @@ function parseLabel(state: StateInline, silent: boolean) {
 	let res = state.md.helpers.parseLinkTitle(state.src, pos, state.posMax);
 	if (!(pos < max && res.ok)) return false;
 
+	if (!state.env.labels) state.env.labels = {};
+	let labelText = state.md.utils.unescapeAll(state.src.slice(labelStart, labelEnd));
+	let colorString = res.str;
+	
+	// Colors only need to be defined once per label. All further labels can use the shorthand [label]().
+	// However, the color can be overwritten on a per-label basis.
+	let labelColor: ColorArray | undefined;
+	if (colorString.length > 0) {
+		// Make sure the color is valid
+		labelColor = parseLabelColor(colorString);
+		if (!labelColor) return false;
+
+		// Only then save the label for shorthand use
+		if (!state.env.labels[labelText]) state.env.labels[labelText] = colorString;
+	}
 
 	if (!silent) {
-		if (!state.env.labels) state.env.labels = {};
-		let labelText = state.md.utils.unescapeAll(state.src.slice(labelStart, labelEnd));
-
-		if (res.str.length < 1) res.str = state.env.labels[labelText] || "grey";
-
-		let labelColor = parseLabelColor(res.str);
-		if (!labelColor) return false;
-		
-		state.env.labels[labelText] = res.str;
 		state.pos = labelStart;
 		state.posMax = labelEnd;
 		let token = state.push("label_tag_open", "span", 1);
-		token.attrs = [["color", labelColor as any]];
+		token.meta = {
+			text: labelText,
+			color: labelColor
+		};
 
 		state.md.inline.tokenize(state);
 
@@ -129,7 +141,7 @@ function parseLabelColor(colorString: string) {
 		}
 	}
 
-	return rgb;
+	return rgb as ColorArray;
 }
 
 /**
@@ -137,7 +149,7 @@ function parseLabelColor(colorString: string) {
  * @param md The markdown-it instance
  * @param options The options for the plugin
  */
-export default function labelPlugin(md: MarkdownIt, options: Options) {
+export default function labelPlugin(md: MarkdownIt, options: MarkdownItLabelOptions) {
 	options = Object.assign({}, defaultOptions, options);
 
 	md.inline.ruler.before("link", "label", parseLabel);
