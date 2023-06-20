@@ -19,6 +19,12 @@ npm install markdown-it-label
 ### Enable
 
 ```js
+// ESM
+import MarkdownIt from "markdown-it";
+import MarkdownItLabel from "markdown-it-label";
+const md = new MarkdownIt().use(MarkdownItLabel, options);
+
+// CommonJS
 const markdown_it = require("markdown-it");
 const markdown_it_label = require("markdown-it-label");
 const md = markdown_it().use(markdown_it_label, options);
@@ -27,7 +33,7 @@ const md = markdown_it().use(markdown_it_label, options);
 ### Syntax
 
 ```md
-#[label_text](color)
+#[Label text](color)
 ```
 
 e.g.
@@ -48,13 +54,33 @@ is interpreted as
 
 #### Colors
 
-Colors can be specified in the following ways:
+Colors can be specified in multiple ways:
 
-- [Color names](https://www.w3schools.com/colors/colors_names.asp): `red`, `gold`,  `WhiteSmoke`
+- [Color names](https://www.w3schools.com/colors/colors_names.asp): `red`, `gold`, `WhiteSmoke`
 - Hex colors: `#FF0000`, `#F5F5F5`
 - Shorthand hexadecimal form: `#000`, `#09C`
 
 The background color is set automatically based on the brightness of the background. Dark and light text colors can be set via options object.
+
+##### Shorthand usage
+
+The color of each label has to be defined only once in the document. Any label with the same text will then use it without explicitly specifying it. It does not matter if the label is defined before or after the shorthand usage.
+
+```md
+## Define label color anywhere in the document
+#[important](yellow)
+
+## Use shorthand without the color argument
+#[important]()
+
+## You can override the color on a per-label basis
+** This label is red **
+#[important](red)
+
+** All others are yellow **
+#[important]()
+```
+
 
 ### Example CSS
 
