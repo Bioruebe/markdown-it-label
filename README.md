@@ -1,6 +1,6 @@
 # markdown-it-label
 
-![npm](https://img.shields.io/npm/v/markdown-it-label) [![Node.js CI](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml/badge.svg)](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml) ![markdown-it](https://img.shields.io/npm/dependency-version/markdown-it-label/peer/markdown-it)
+[![npm](https://img.shields.io/npm/v/markdown-it-label)](https://www.npmjs.com/package/markdown-it-label) [![Node.js CI](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml/badge.svg)](https://github.com/Bioruebe/markdown-it-label/actions/workflows/node.js.yml) ![markdown-it](https://img.shields.io/npm/dependency-version/markdown-it-label/peer/markdown-it)
 
 > A markdown-it plugin, which adds labels/tags
 
