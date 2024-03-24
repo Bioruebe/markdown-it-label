@@ -25,9 +25,9 @@ import MarkdownItLabel from "markdown-it-label";
 const md = new MarkdownIt().use(MarkdownItLabel, options);
 
 // CommonJS
-const markdown_it = require("markdown-it");
-const markdown_it_label = require("markdown-it-label");
-const md = markdown_it().use(markdown_it_label, options);
+const markdownIt = require("markdown-it");
+const markdownItLabel = require("markdown-it-label");
+const md = markdownIt().use(markdownItLabel, options);
 ```
 
 ### Syntax
@@ -45,11 +45,9 @@ e.g.
 is interpreted as
 
 ```html
-<p>
-    <span class="label" style="background-color: rgb(255, 0, 0); color: white;">
-        important
-    </span>
-</p>
+<span class="mdi-label mdi-label-text-light" style="background-color: rgb(255, 0, 0)">
+    important
+</span>
 ```
 
 #### Colors
