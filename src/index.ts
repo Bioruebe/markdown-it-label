@@ -1,8 +1,7 @@
 import type MarkdownIt from "markdown-it";
-import type Token from "markdown-it/lib/token";
+import type { StateInline, Token } from "markdown-it";
 
 import cssColorNames from "css-color-names";
-import StateInline from "markdown-it/lib/rules_inline/state_inline";
 
 
 export const defaultOptions = {
